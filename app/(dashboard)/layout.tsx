@@ -7,7 +7,7 @@ type Props = {
 
 function DashboardLayout({children}: Props) {
   return (
-    <div className='relative flex min-h-screen w-full  flex-col'>
+    <div className='relative flex min-h-screen mb-20 w-full  flex-col'>
       <Navbar />
         <div className="w-full">
             {children}

@@ -6,6 +6,7 @@ import { currentUser } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation';
 import React from 'react'
 import CreateTransactionDialog from './_components/CreateTransactionDialog';
+import OverView from './_components/OverView';
 
 type Props = {}
 
@@ -48,6 +49,10 @@ async function page({}: Props) {
           </div>
         </div>
       </div>
+
+      <OverView userSettings={userSettings} />
+
+      
     </div>
   )
 }
