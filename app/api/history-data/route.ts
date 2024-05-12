@@ -13,35 +13,31 @@ const getHistoryDataSchema = z.object({
 
 export async function GET(request: Request) {
 
-    try {
-        const user = await currentUser();
+    const user = await currentUser();
     
-        if(!user) {
-            return redirect("/sign-in");
-        }
-    
-        const {searchParams} = new URL(request.url);
-        const timeframe = searchParams.get("timeframe");
-        const year = searchParams.get("year");
-        const month = searchParams.get("month");
-    
-        const queryParams = getHistoryDataSchema.safeParse({timeframe, month, year});
-    
-        if(!queryParams.success) {
-            return Response.json(queryParams.error.message, { status: 400})
-        }
-    
-        const data = await getHistoryData(user.id, queryParams.data.timeframe, 
-            { 
-                month: queryParams.data.month,
-                year:  queryParams.data.year,
-            }
-        );
-
-        return Response.json(data)
-        
-    } catch (error) {
+    if(!user) {
+        return redirect("/sign-in");
     }
+
+    const {searchParams} = new URL(request.url);
+    const timeframe = searchParams.get("timeframe");
+    const year = searchParams.get("year");
+    const month = searchParams.get("month");
+
+    const queryParams = getHistoryDataSchema.safeParse({timeframe, month, year});
+
+    if(!queryParams.success) {
+        return Response.json(queryParams.error.message, { status: 400})
+    }
+
+    const data = await getHistoryData(user.id, queryParams.data.timeframe, 
+        { 
+            month: queryParams.data.month,
+            year:  queryParams.data.year,
+        }
+    );
+
+    return Response.json(data)
 }
 
 export type GetHistoryDataReponseType = Awaited<ReturnType<typeof getHistoryData>>
