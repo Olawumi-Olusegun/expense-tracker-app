@@ -107,6 +107,12 @@ function DesktopNavbar() {
 function NavbarItem({link, label, clickCallback}: {link: string; label: string; clickCallback?: () => void}) {
     const pathname = usePathname();
     const isActive = pathname === link;
+    
+    const handleMenuClick = () => {
+        if(clickCallback) {
+            clickCallback();
+        }
+    }
     return (
         <>
             <div className="relative flex items-center">
@@ -115,10 +121,7 @@ function NavbarItem({link, label, clickCallback}: {link: string; label: string; 
                     "w-full justify-start text-lg text-muted-foreground hover:text-foreground",
                     isActive && "text-foreground"
                 )}
-                onClick={() => {
-                    if(clickCallback) clickCallback()
-                }}
-                >
+                onClick={handleMenuClick} >
                     {label}
                 </Link>
                 {

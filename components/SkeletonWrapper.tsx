@@ -13,9 +13,7 @@ function SkeletonWrapper({children, isLoading, fullWidth = true}: Props) {
         return children;
     }
   return (
-    <Skeleton className={
-        cn(fullWidth && "w-full")
-    }>
+    <Skeleton className={ cn(fullWidth && "w-full") }>
         <div className="opacity-0 ">{children}</div>
     </Skeleton>
   )
